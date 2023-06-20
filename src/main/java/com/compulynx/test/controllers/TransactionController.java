@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+@CrossOrigin("*")
 
 @RestController
 @RequestMapping("/transaction")
@@ -40,7 +41,7 @@ public class TransactionController {
         return transactionService.cashWithdrawal(accountId, withdrawal.getAmount()).getAccountBalance();
     }
 
-    @PostMapping("/transfer")
+    @PostMapping ("/transfer")
     Double cashTransfer(@RequestBody Transfer transfer, HttpServletRequest req) {
         Account account_A = accountService.getAccount(req);
         return transactionService.fundTransfer(account_A, transfer.getToAccount(), transfer.getAmount()).getAccountBalance();

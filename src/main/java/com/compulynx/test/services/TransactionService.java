@@ -29,12 +29,12 @@ public class TransactionService {
                     Account account1 = account_B.get();
                     account1.setAccountBalance(account1.getAccountBalance() + amount);
                     transactionRepo.save(
-                            new Transaction(UUID.randomUUID().toString(), TransactionType.Debit, account1.getAccountId(), new Timestamp(System.currentTimeMillis())));
+                            new Transaction(UUID.randomUUID().toString(), TransactionType.Debit, account1.getAccountId(), new Timestamp(System.currentTimeMillis()), amount));
                     accountRepo.save(account1);
                     //Todo: Save transaction for account B
                 }
                 transactionRepo.save(
-                        new Transaction(UUID.randomUUID().toString(), TransactionType.Credit, account.getAccountId(), new Timestamp(System.currentTimeMillis())));
+                        new Transaction(UUID.randomUUID().toString(), TransactionType.Credit, account.getAccountId(), new Timestamp(System.currentTimeMillis()), amount));
                 return accountRepo.save(account);
                 //Todo: Save transaction for account A
             }
@@ -46,7 +46,7 @@ public class TransactionService {
         if (account.isPresent() && account.get().getAccountBalance() > amount) {
             Account account1 = account.get();
             account1.setAccountBalance(account1.getAccountBalance() - amount);
-            transactionRepo.save(new Transaction(UUID.randomUUID().toString(), TransactionType.Credit, accountID, new Timestamp(System.currentTimeMillis())));
+            transactionRepo.save(new Transaction(UUID.randomUUID().toString(), TransactionType.Credit, accountID, new Timestamp(System.currentTimeMillis()), amount));
             return accountRepo.save(account1);
         }
         return null;
@@ -57,7 +57,7 @@ public class TransactionService {
         if (account2.isPresent()) {
             Account account1 = account2.get();
             account1.setAccountBalance(account1.getAccountBalance() + amount);
-            transactionRepo.save(new Transaction(UUID.randomUUID().toString(), TransactionType.Debit, accountID, new Timestamp(System.currentTimeMillis())));
+            transactionRepo.save(new Transaction(UUID.randomUUID().toString(), TransactionType.Debit, accountID, new Timestamp(System.currentTimeMillis()), amount));
             return accountRepo.save(account1);
         }
         return null;

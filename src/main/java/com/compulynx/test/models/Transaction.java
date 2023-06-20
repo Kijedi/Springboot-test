@@ -15,13 +15,15 @@ public class Transaction {
     private String transactionId;
     private TransactionType transactionType;
     private String accountId;
+    private Double amount;
     private Timestamp timestamp;
 
-    public Transaction(String transactionId, TransactionType transactionType, String accountId, Timestamp timestamp) {
+    public Transaction(String transactionId, TransactionType transactionType, String accountId, Timestamp timestamp, Double amount) {
         this.transactionId = transactionId;
         this.transactionType = transactionType;
         this.accountId = accountId;
         this.timestamp = timestamp;
+        this.amount = amount;
     }
 
     public Transaction() {
@@ -65,6 +67,14 @@ public class Transaction {
 
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
     }
 }
 
